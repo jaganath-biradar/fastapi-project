@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- HERO -->
+<div class="p-4 mb-4 rounded-4 text-white"
+     style="background: linear-gradient(135deg,#4e73df,#224abe);">
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
+            <h2 class="fw-bold">📚 My Book Library</h2>
+            <p class="mb-0 opacity-75">Manage your books easily</p>
+        </div>
+
+        <a href="/create-page" class="btn btn-success btn-lg">
+            ➕ Add New Book
+        </a>
+    </div>
+</div>
+
+<!-- TABLE CARD -->
+<div class="card shadow-lg border-0 rounded-4">
+    <div class="card-body">
+
+        <table class="table table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Year</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for item in items %}
+                <tr>
+                    <td class="fw-bold">{{ item.id }}</td>
+                    <td>{{ item.title }}</td>
+
+                    <td>
+                        <span class="badge bg-secondary px-3 py-2">
+                            {{ item.author }}
+                        </span>
+                    </td>
+
+                    <td>
+                        <span class="badge bg-info text-dark px-3 py-2">
+                            {{ item.year }}
+                        </span>
+                    </td>
+
+                    <td class="text-center">
+                        <a href="/edit/{{ item.id }}"
+                           class="btn btn-warning btn-sm me-2">
+                            ✏ Edit
+                        </a>
+
+                        <a href="/delete/{{ item.id }}"
+                           class="btn btn-danger btn-sm"
+                           onclick="return confirm('Delete this book?')">
+                            🗑 Delete
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+{% endblock %}
